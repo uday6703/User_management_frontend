@@ -1,0 +1,10 @@
+body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f7f7f7; }
+nav { background: #222; color: #fff; padding: 1rem; }
+nav a { color: #fff; margin-right: 1rem; text-decoration: none; }
+nav a:hover { text-decoration: underline; }
+.container { max-width: 800px; margin: 2rem auto; background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+button { background: #007bff; color: #fff; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; }
+button:disabled { background: #ccc; }
+input, textarea { width: 100%; padding: 0.5rem; margin-bottom: 1rem; border: 1px solid #ccc; border-radius: 4px; }
+label { font-weight: bold; }
+.error { color: red; margin-bottom: 1rem; }
