@@ -3,7 +3,7 @@
 // TODO: Add phone number validation, show loading state
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
+import { get, post, put } from '../api';
 
 const initialState = {
   name: '', email: '', phone: '', company: '',
@@ -18,7 +18,7 @@ function UserForm({ editMode }) {
 
   useEffect(() => {
     if (editMode && id) {
-      axios.get(`/api/users/${id}`)
+      get(`/api/users/${id}`)
         .then(res => {
           setUser(res.data);
           // Debug: log loaded user
@@ -62,11 +62,11 @@ function UserForm({ editMode }) {
     if (err) return setError(err);
     try {
       if (editMode) {
-        await axios.put(`/api/users/${id}`, user);
+        await put(`/api/users/${id}`, user);
         // Debug: log update
         console.log('Updated user:', user.email);
       } else {
-        await axios.post('/api/users', user);
+        await post('/api/users', user);
         // Debug: log creation
         console.log('Created user:', user.email);
       }

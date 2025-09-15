@@ -3,14 +3,14 @@
 // TODO: Add search/filter functionality
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { get } from '../api';
 
 function UserList() {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    axios.get('/api/users')
+    get('/api/users')
       .then(res => {
         setUsers(res.data);
         // Debug: log users fetched

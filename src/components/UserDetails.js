@@ -3,7 +3,7 @@
 // TODO: Add avatar/profile picture
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { get, del } from '../api';
 
 function UserDetails() {
   const { id } = useParams();
@@ -12,7 +12,7 @@ function UserDetails() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`/api/users/${id}`)
+    get(`/api/users/${id}`)
       .then(res => {
         setUser(res.data);
         // Debug: log loaded user details
@@ -24,7 +24,7 @@ function UserDetails() {
   const handleDelete = async () => {
     if (window.confirm('Delete this user?')) {
       try {
-        await axios.delete(`/api/users/${id}`);
+        await del(`/api/users/${id}`);
         // Debug: log deletion
         console.log('Deleted user:', id);
         navigate('/');
