@@ -3,7 +3,7 @@
 // TODO: Add phone number validation, show loading state
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { get, post, put } from '../api';
+import { get, post, put, del } from '../api';
 
 const initialState = {
   name: '', email: '', phone: '', company: '',
@@ -76,6 +76,19 @@ function UserForm({ editMode }) {
     }
   };
 
+  const handleDelete = async () => {
+    if (!editMode || !id) return;
+    if (window.confirm('Delete this user?')) {
+      try {
+        await del(`/api/users/${id}`);
+        console.log('Deleted user:', id);
+        navigate('/');
+      } catch (e) {
+        setError('Failed to delete user');
+      }
+    }
+  };
+
   return (
     <div className="container">
       <h2>{editMode ? 'Edit User' : 'Add User'}</h2>
@@ -101,6 +114,11 @@ function UserForm({ editMode }) {
         <label>Geo Lng</label>
         <input name="address.geo.lng" value={user.address.geo.lng} onChange={handleChange} required />
         <button type="submit">{editMode ? 'Update' : 'Create'}</button>
+        {editMode && (
+          <button type="button" onClick={handleDelete} style={{ marginLeft: '1rem', background: '#dc3545' }}>
+            Delete
+          </button>
+        )}
       </form>
     </div>
   );
